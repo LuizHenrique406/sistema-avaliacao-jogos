@@ -13,7 +13,7 @@ class View:
         telefone = 84999999999
         for obj in ClienteDAO.listar():
             if obj.get_email() == "admin@" and obj.get_senha() == "admin": return
-        ClienteDAO.inserir(Cliente(id, nome, email, telefone, senha)) # se o if não for verdadeiro, ele passa para a próxima linha e cria um novo admin
+        ClienteDAO.inserir(Cliente(id, nome, email, senha)) # se o if não for verdadeiro, ele passa para a próxima linha e cria um novo admin
     @staticmethod
     def cliente_autenticar(email, senha):
         for obj in View.cliente_listar():
@@ -44,15 +44,12 @@ class View:
         return ClienteDAO.listar_id(id)
 
     def cliente_atualizar(id, nome, email, telefone, senha):
-        if nome == "" or email == "" or telefone == "" or senha == "":
+        if nome == "" or email == "" or senha == "":
             raise ValueError("Erro! O preenchimento de todos os campos é obrigatório.")
         if "0" in nome or "1" in nome or "2" in nome or "3" in nome or "4" in nome or "5" in nome or "6" in nome or "7" in nome or "8" in nome or "9" in nome:
             raise ValueError("Erro! O nome não pode conter números.")
         if "@" not in email:
             raise ValueError("Erro! O email fornecido é inválido.")
-        ddds_brasil = [11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34, 35, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62, 64, 63, 65, 66, 67, 68, 69, 71, 73, 74, 75, 77, 79, 81, 87, 82, 83, 84, 85, 88,86, 89, 91, 93, 94, 92, 97, 95, 96, 98, 99]
-        if len(telefone) == 0 or int(telefone[:2]) not in ddds_brasil:
-            raise ValueError("Erro! O número de telefone fornecido é inválido.")
         c = Cliente(id, nome, email, telefone, senha)
         ClienteDAO.atualizar(c)
         
@@ -84,11 +81,11 @@ class View:
         c = Categoria(id, descricao)
         CategoriaDAO.excluir(c)
 
-    def jogos_inserir(id, descricao, idCategoria, idJogados):
+    def jogos_inserir(id, descricao, idCategoria):
         id = 0
         if descricao == "":
             raise ValueError("Erro! O preenchimento de todos os campos é obrigatório.")
-        c = Jogos(id, descricao, idCategoria, idJogados)
+        c = Jogos(id, descricao, idCategoria)
         JogosDAO.inserir(c)
     def jogos_listar():
         return JogosDAO.listar()

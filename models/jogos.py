@@ -6,7 +6,6 @@ class Jogos:
         self.set_id(idJogo)
         self.set_descricao(descricao)
         self.set_idCategoria(idCategoria)
-        self.set_idJogados(idJogados)
     
     def set_id(self, id):
         self.__id = id
@@ -17,26 +16,21 @@ class Jogos:
     def set_idCategoria(self, idCategoria):
         self.__idCategoria = idCategoria
 
-    def set_idJogados(self, idJogados):
-        self.__idJogados = idJogados
-
     def get_id(self):
         return self.__id
     def get_descricao(self):
         return self.__descricao
     def get_idCategoria(self):
         return self.__idCategoria
-    def get_idJogados(self):
-        return self.__idJogados
     
     def to_json(self):
-        return {"id" : self.__id, "descricao" : self.__descricao, "idCategoria" : self.__idCategoria, "idJogados" : self.__idJogados} # me permite que eu ponha o nome que eu quiser para as chaves
+        return {"id" : self.__id, "descricao" : self.__descricao, "idCategoria" : self.__idCategoria} # me permite que eu ponha o nome que eu quiser para as chaves
     @staticmethod
     def from_json(dic):
-        return Jogos(dic["id"], dic["descricao"], dic["idCategoria"], dic["idJogados"])
+        return Jogos(dic["id"], dic["descricao"], dic["idCategoria"])
     
     def __str__(self):
-        return f"{self.__id} - {self.__descricao} - Categoria {self.__idCategoria} - Jogados {self.__idJogados}"
+        return f"{self.__id} - {self.__descricao} - Categoria {self.__idCategoria}"
 
 
 class JogosDAO(DAO):

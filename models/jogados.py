@@ -1,5 +1,4 @@
 import json
-from models.classe_dao import DAO
 
 class Jogados:
     def __init__(self, idJogo, idCliente):
@@ -18,7 +17,7 @@ class Jogados:
         return self.__idCliente
 
 class JogadosDAO:
-c
+    objetos = []
     @classmethod 
     def jogados_cliente(cls, idCliente):
         cls.abrir()
