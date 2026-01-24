@@ -1,11 +1,14 @@
 import json
+import os
 from models.classe_dao import DAO
 
+
 class Jogos:
-    def __init__(self, idJogo, descricao, idCategoria):
+    def __init__(self, idJogo, descricao, idCategoria, imagem):
         self.set_id(idJogo)
         self.set_descricao(descricao)
         self.set_idCategoria(idCategoria)
+        self.set_imagem(imagem)
     
     def set_id(self, id):
         self.__id = id
@@ -15,6 +18,9 @@ class Jogos:
 
     def set_idCategoria(self, idCategoria):
         self.__idCategoria = idCategoria
+    
+    def set_imagem(self, imagem):
+        self.__imagem = imagem
 
     def get_id(self):
         return self.__id
@@ -22,25 +28,21 @@ class Jogos:
         return self.__descricao
     def get_idCategoria(self):
         return self.__idCategoria
+    def get_imagem(self):
+        return self.__imagem
     
     def to_json(self):
-        return {"id" : self.__id, "descricao" : self.__descricao, "idCategoria" : self.__idCategoria} # me permite que eu ponha o nome que eu quiser para as chaves
+        return {"id" : self.__id, "descricao" : self.__descricao, "idCategoria" : self.__idCategoria, "imagem" : self.__imagem} # me permite que eu ponha o nome que eu quiser para as chaves
     @staticmethod
     def from_json(dic):
-        return Jogos(dic["id"], dic["descricao"], dic["idCategoria"])
+        return Jogos(dic["id"], dic["descricao"], dic["idCategoria"], dic.get("imagem"))
     
     def __str__(self):
-        return f"{self.__id} - {self.__descricao} - Categoria {self.__idCategoria}"
+        return f"{self.__id} - {self.__descricao} - Categoria {self.__idCategoria} - Imagem: {self.__imagem}"
 
 
 class JogosDAO(DAO):
     objetos = []
-    @classmethod
-    def excluir_lote_idJogo(cls, idJogo):
-        cls.abrir()
-        for objeto in cls.venda_item:
-            if objeto.get_id() == idJogo:
-                cls.excluir(objeto)
     def pesquisa_jogos(cls, descricao):
         cls.abrir()
         for obj in cls.objetos:

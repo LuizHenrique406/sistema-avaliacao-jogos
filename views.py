@@ -3,17 +3,17 @@ from models.categorias import Categoria, CategoriaDAO
 from models.jogos import Jogos, JogosDAO
 from models.favoritos import Favorito, FavoritoDAO
 from models.jogados import Jogados, JogadosDAO
-from models.classe_dao import DAO
 
 class View:
     @staticmethod
     def cliente_criar_admin(email="admin@", senha="admin"):
         id = None
         nome = "Administrador"
-        telefone = 84999999999
         for obj in ClienteDAO.listar():
-            if obj.get_email() == "admin@" and obj.get_senha() == "admin": return
-        ClienteDAO.inserir(Cliente(id, nome, email, senha)) # se o if não for verdadeiro, ele passa para a próxima linha e cria um novo admin
+            if obj.get_email() == "admin@" and obj.get_senha() == "admin": 
+                return
+            else:
+                ClienteDAO.inserir(Cliente(id, nome, email, senha)) 
     @staticmethod
     def cliente_autenticar(email, senha):
         for obj in View.cliente_listar():
@@ -81,23 +81,23 @@ class View:
         c = Categoria(id, descricao)
         CategoriaDAO.excluir(c)
 
-    def jogos_inserir(id, descricao, idCategoria):
+    def jogos_inserir(id, descricao, idCategoria, imagem):
         id = 0
         if descricao == "":
             raise ValueError("Erro! O preenchimento de todos os campos é obrigatório.")
-        c = Jogos(id, descricao, idCategoria)
+        c = Jogos(id, descricao, idCategoria, imagem)
         JogosDAO.inserir(c)
     def jogos_listar():
         return JogosDAO.listar()
     def jogos_listar_id(id):
         return JogosDAO.listar_id(id)
-    def jogos_atualizar(id, descricao, idCategoria, idJogados):
+    def jogos_atualizar(id, descricao, idCategoria, imagem):
         if descricao == "":
             raise ValueError("Erro! O preenchimento de todos os campos é obrigatório.")
-        c = Jogos(id, descricao, idCategoria, idJogados)
+        c = Jogos(id, descricao, idCategoria, imagem)
         JogosDAO.atualizar(c)
-    def jogos_excluir(id, descricao, idCategoria, idJogados):
-        c = Jogos(id, descricao, idCategoria, idJogados)
+    def jogos_excluir(id, descricao, idCategoria, imagem):
+        c = Jogos(id, descricao, idCategoria, imagem)
         JogosDAO.excluir(c)
         FavoritoDAO.excluir_lote_idJogo(id)
     def listar_jogos(descricao):
@@ -114,3 +114,31 @@ class View:
     def excluir_jogado(idJogo, idCliente):
         j = Jogados(idJogo, idCliente)
         JogadosDAO.excluir_jogado(j)
+
+    def favoritar(obj):
+        f = JogosDAO.listar_id(obj.get_id())
+        if f != None:
+            FavoritoDAO.favoritar(obj)
+    def desfavoritar(obj):
+        f = JogosDAO.listar_id(obj.get_id())
+        if f != None:
+            FavoritoDAO.desfavoritar(obj)
+    def produtos_favoritos(idCliente):
+        fav = []
+        favoritos = FavoritoDAO.favoritos(idCliente)
+        for f in favoritos:
+            produto = JogosDAO.listar_id(f.get_id())
+            fav.append({
+            "idJogo": produto.get_id(),
+            "Jogo": produto.get_descricao(),
+        })
+        if len(fav) == 0:
+            return None 
+        return fav
+    def lista_favoritados(idCliente):
+        fav = []
+        favoritos = FavoritoDAO.favoritos(idCliente)
+        for f in favoritos:
+            produto = JogosDAO.listar_id(f.get_id())
+            fav.append([produto.get_id(), produto.get_descricao()])
+        return fav

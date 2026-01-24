@@ -39,11 +39,11 @@ class ClienteDAO(DAO):
     objetos = []
 
     @classmethod
-    def salvar_json(cls):
+    def salvar(cls):
         with open("clientes.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = Cliente.to_json, indent=4)
     @classmethod
-    def abrir_json(cls):
+    def abrir(cls):
         cls.objetos = []
         try:
             with open("clientes.json", mode="r") as arquivo:

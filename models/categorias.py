@@ -30,11 +30,11 @@ class Categoria:
 class CategoriaDAO(DAO):
     objetos = []
     @classmethod
-    def salvar_json(cls):
+    def salvar(cls):
         with open("categorias.json", mode="w") as arquivo:
                 json.dump(cls.objetos, arquivo, default = Categoria.to_json, indent=4)
     @classmethod
-    def abrir_json(cls):
+    def abrir(cls):
         cls.objetos = []
         try:
             with open("categorias.json", mode="r") as arquivo:

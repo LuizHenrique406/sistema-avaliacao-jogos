@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "descricao": "COD",
+        "idCategoria": 1,
+        "imagem": "images/hawgirl kendra saunders superman 2025.jpg"
+    },
+    {
+        "id": 2,
+        "descricao": "TESTE",
+        "idCategoria": 1,
+        "imagem": "images/Copilot_20260107_194322.png"
+    }
+]
