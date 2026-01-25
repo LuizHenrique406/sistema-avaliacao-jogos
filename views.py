@@ -2,7 +2,7 @@ from models.cliente import Cliente, ClienteDAO
 from models.categorias import Categoria, CategoriaDAO
 from models.jogos import Jogos, JogosDAO
 from models.favoritos import Favorito, FavoritoDAO
-from models.jogados import Jogados, JogadosDAO
+from models.resenha import Resenha, ResenhaDAO
 
 class View:
     @staticmethod
@@ -55,7 +55,7 @@ class View:
         
     def cliente_excluir(id, nome, email, telefone, senha):
         c = Cliente(id, nome, email, telefone, senha)
-        JogadosDAO.excluir_lote_idCliente(id)
+        ResenhaDAO.excluir_lote_idCliente(id)
         FavoritoDAO.excluir_lote_idCliente(id)
         ClienteDAO.excluir(c)
 
@@ -106,17 +106,17 @@ class View:
                 return obj
         return f"Jogo não encontrado!"
     
-    def inserir_jogados(idJogo, idCliente):
-        j = Jogados(idJogo, idCliente)
-        JogadosDAO.marcar_jogado(j)
-    def jogados_cliente(idCliente):
-        return JogadosDAO.jogados_cliente(idCliente)
-    def excluir_jogado(idJogo, idCliente):
-        j = Jogados(idJogo, idCliente)
-        JogadosDAO.excluir_jogado(j)
+    #def inserir_jogados(idJogo, idCliente):
+       # j = Jogados(idJogo, idCliente)
+        #JogadosDAO.marcar_jogado(j)
+    #def jogados_cliente(idCliente):
+     #   return JogadosDAO.jogados_cliente(idCliente)
+    #def excluir_jogado(idJogo, idCliente):
+     #   j = Jogados(idJogo, idCliente)
+      #  JogadosDAO.excluir_jogado(j)
 
     def favoritar(obj):
-        f = JogosDAO.listar_id(obj.get_id())
+        f = JogosDAO.listar_id(obj.get_idCliente())
         if f != None:
             FavoritoDAO.favoritar(obj)
     def desfavoritar(obj):
@@ -142,3 +142,23 @@ class View:
             produto = JogosDAO.listar_id(f.get_id())
             fav.append([produto.get_id(), produto.get_descricao()])
         return fav
+    def resenha_inserir(idJogo, idCliente, resenha):
+        id = 0
+        c = Resenha(id, idCliente, idJogo, resenha)
+        ResenhaDAO.inserir(c)
+    
+    def resenha_listar():
+        return ResenhaDAO.listar()
+    
+    def resenha_listar_id(id):
+        return ResenhaDAO.listar_id(id)
+
+    def resenha_atualizar(id, idCliente, idJogo, resenha):
+        c = Resenha(id, idCliente, idJogo, resenha)
+        ClienteDAO.atualizar(c)
+        
+    def resenha_excluir(id, idCliente, idJogo, resenha):
+        c = Resenha(id, idCliente, idJogo, resenha)
+        ResenhaDAO.excluir_lote_idCliente(id)
+        FavoritoDAO.excluir_lote_idCliente(id)
+        ClienteDAO.excluir(c)

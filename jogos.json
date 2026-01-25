@@ -10,5 +10,11 @@
         "descricao": "TESTE",
         "idCategoria": 1,
         "imagem": "images/Copilot_20260107_194322.png"
+    },
+    {
+        "id": 3,
+        "descricao": "Battlefield 4",
+        "idCategoria": 3,
+        "imagem": "images/battlefield4.svg"
     }
 ]

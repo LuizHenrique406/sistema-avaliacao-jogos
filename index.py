@@ -6,6 +6,7 @@ from templates.listar_jogos import ListarJogosUI
 from templates.manter_categorias_adm import ManterCategoriaUI
 from templates.manter_cliente_adm import ManterClienteUI
 from templates.manter_jogos_adm import ManterJogosUI
+from templates.listar_resenha import ListarResenhaUI
 
 
 class IndexUI:
@@ -16,10 +17,11 @@ class IndexUI:
                 if op == "Criar Conta": CriarContaUI.main()
         def menu_cliente():
                 op = st.sidebar.selectbox("Menu", ["Listar jogos",
-                                        "Quero comprar",
-                                        "Listar minhas compras",
-                                        "Favoritar produtos"])
+                                        "Meu checklist",
+                                        "Meus favoritos",
+                                        "Minhas resenhas"])
                 if op == "Listar jogos": ListarJogosUI.main()
+                if op == "Minhas resenhas": ListarResenhaUI.main()
         def menu_admin():
                 # st.sidebar.selectbox: caixa de seleção
                 op = st.sidebar.selectbox("Menu", ["Cadastro de Categorias", 

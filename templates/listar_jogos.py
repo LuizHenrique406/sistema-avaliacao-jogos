@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd
+import time
 from views import View
 from models.favoritos import Favorito
 
@@ -14,5 +14,18 @@ class ListarJogosUI:
             with cards[i]:
                 st.write(jogo.get_descricao())
                 st.image(jogo.get_imagem(), width="content")
-                st.text_area(f"Escreva sua resenha aqui sobre esse jogo aqui", key=jogo.get_descricao())
-                if st.button("Favoritar", key="")
+                idJogo = str(jogo.get_id())
+                idCliente = st.session_state["cliente_id"]
+                if st.button("Favoritar", key=f"salvar_{jogo.get_id()}_{idCliente}"):
+                    obj = Favorito(jogo.get_id(), idCliente)
+                    View.favoritar(obj)
+                    st.success("Jogo favoritado com sucesso!")
+                    time.sleep(2)
+                    st.rerun()
+                resenha = st.text_area(f"Escreva sua resenha aqui sobre esse jogo aqui", key=jogo.get_descricao())
+                if st.button("Salvar resenha", key=idJogo):
+                    try:
+                        View.resenha_inserir(jogo.get_id(), idCliente, resenha)
+                        st.success("Resenha salva com sucesso! Acesse 'Minhas resenhas' para vê-las!")
+                    except Exception as erro:
+                        st.error(f"{erro}")
