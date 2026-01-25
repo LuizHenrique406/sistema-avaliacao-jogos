@@ -5,7 +5,7 @@ from views import View
 
 class ListarResenhaUI:
     def main():
-        
+        st.title("Minhas resenhas")
         tab1, tab2, tab3 = st.tabs(["Listar", "Atualizar", "Excluir"])
         with tab1: ListarResenhaUI.listar_resenha()
         with tab2: ListarResenhaUI.atualizar_resenha()
@@ -36,14 +36,14 @@ class ListarResenhaUI:
                 except Exception as erro:
                     st.error(f"{erro}")
     def excluir_resenha():
-        resenhas = View.categoria_listar()
-        if len(resenhas) == 0: st.write("Nenhum resenha cadastrada até o momento")
+        resenhas = View.resenha_listar()
+        if len(resenhas) == 0: st.write("Nenhuma resenha salva até o momento")
         else:
             op = st.selectbox("Excluir resenhas", resenhas)
             if op:
                 if st.button("Excluir"):
                     id = op.get_id()
                     descricao = op.get_resenha()
-                    View.categoria_excluir(id, descricao)
+                    View.resenha_excluir(id, descricao)
                     st.success("Categoria excluído com sucesso!")
                     st.rerun()

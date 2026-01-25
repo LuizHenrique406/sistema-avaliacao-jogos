@@ -116,18 +116,18 @@ class View:
       #  JogadosDAO.excluir_jogado(j)
 
     def favoritar(obj):
-        f = JogosDAO.listar_id(obj.get_idCliente())
+        f = JogosDAO.listar_id(obj.get_idJogo())
         if f != None:
             FavoritoDAO.favoritar(obj)
     def desfavoritar(obj):
-        f = JogosDAO.listar_id(obj.get_id())
+        f = JogosDAO.listar_id(obj.get_idJogo())
         if f != None:
             FavoritoDAO.desfavoritar(obj)
     def produtos_favoritos(idCliente):
         fav = []
         favoritos = FavoritoDAO.favoritos(idCliente)
         for f in favoritos:
-            produto = JogosDAO.listar_id(f.get_id())
+            produto = JogosDAO.listar_id(f.get_idJogo())
             fav.append({
             "idJogo": produto.get_id(),
             "Jogo": produto.get_descricao(),

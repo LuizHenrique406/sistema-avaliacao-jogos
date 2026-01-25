@@ -7,6 +7,7 @@ from templates.manter_categorias_adm import ManterCategoriaUI
 from templates.manter_cliente_adm import ManterClienteUI
 from templates.manter_jogos_adm import ManterJogosUI
 from templates.listar_resenha import ListarResenhaUI
+from templates.listar_favoritos import ManterFavoritoUI
 
 
 class IndexUI:
@@ -22,6 +23,7 @@ class IndexUI:
                                         "Minhas resenhas"])
                 if op == "Listar jogos": ListarJogosUI.main()
                 if op == "Minhas resenhas": ListarResenhaUI.main()
+                if op == "Meus favoritos": ManterFavoritoUI.main()
         def menu_admin():
                 # st.sidebar.selectbox: caixa de seleção
                 op = st.sidebar.selectbox("Menu", ["Cadastro de Categorias", 
