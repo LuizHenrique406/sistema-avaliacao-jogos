@@ -6,7 +6,7 @@ from models.favoritos import Favorito
 class ListarJogosUI:
     def main():
         st.title("🎮 Catálogo de jogos")
-        st.selectbox("Busque seu jogo pela sua categoria preferida!", View.categoria_listar())
+        st.write("Escreva resenhas e curta seus jogos favoritos!")
         jogos = View.jogos_listar()
         idCliente = st.session_state["cliente_id"]
         cols_por_linha = 4 

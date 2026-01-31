@@ -18,7 +18,6 @@ class IndexUI:
                 if op == "Criar Conta": CriarContaUI.main()
         def menu_cliente():
                 op = st.sidebar.selectbox("Menu", ["Listar jogos",
-                                        "Meu checklist",
                                         "Meus favoritos",
                                         "Minhas resenhas"])
                 if op == "Listar jogos": ListarJogosUI.main()
