@@ -8,6 +8,18 @@ class ListarJogosUI:
         st.title("🎮 Catálogo de jogos")
         st.write("Escreva resenhas e curta seus jogos favoritos!")
         jogos = View.jogos_listar()
+        pesquisa = st.text_input("Pesquise seu jogo aqui")
+        if st.button("Buscar"):
+            resultado = View.pesquisar_jogos(pesquisa)
+            if resultado:
+                    j = View.jogos_listar_id(resultado)
+                    col = st.columns(1)
+                    st.success("1 jogo foi encontrado!")
+                    if col:
+                        st.write(j.get_descricao()) 
+                        st.image(j.get_imagem(), width=200)
+            else:
+                st.error("Nenhum jogo encontrado")
         idCliente = st.session_state["cliente_id"]
         cols_por_linha = 4 
         for j in range(0, len(jogos), cols_por_linha): 
@@ -15,7 +27,7 @@ class ListarJogosUI:
             for i, jogo in enumerate(jogos[j:j+cols_por_linha]):
                 with cols[i]:
                     st.write(jogo.get_descricao())
-                    st.image(jogo.get_imagem(), width="content")
+                    st.image(jogo.get_imagem())
                     idJogo = str(jogo.get_id())
                     if st.button("Favoritar", key=f"salvar_{jogo.get_id()}_{idCliente}"):
                         obj = Favorito(jogo.get_id(), idCliente)

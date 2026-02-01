@@ -17,10 +17,10 @@ class IndexUI:
                 if op == "Entrar no sistema": LoginUI.main()
                 if op == "Criar Conta": CriarContaUI.main()
         def menu_cliente():
-                op = st.sidebar.selectbox("Menu", ["Listar jogos",
+                op = st.sidebar.selectbox("Menu", ["Catálogo de jogos",
                                         "Meus favoritos",
                                         "Minhas resenhas"])
-                if op == "Listar jogos": ListarJogosUI.main()
+                if op == "Catálogo de jogos": ListarJogosUI.main()
                 if op == "Minhas resenhas": ListarResenhaUI.main()
                 if op == "Meus favoritos": ManterFavoritoUI.main()
         def menu_admin():

@@ -16,5 +16,11 @@
         "descricao": "COD MW",
         "idCategoria": 1,
         "imagem": "images/codMW.svg"
+    },
+    {
+        "id": 4,
+        "descricao": "Alien Rage",
+        "idCategoria": 1,
+        "imagem": "images/image 5(1).svg"
     }
 ]

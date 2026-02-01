@@ -174,3 +174,11 @@ class View:
         c = Resenha(id, idCliente, idJogo, resenha)
         ResenhaDAO.excluir_lote_idCliente(id)
         ResenhaDAO.excluir(c)
+    
+    def pesquisar_jogos(descricao):
+        jogos = JogosDAO.listar()
+        for obj in jogos:
+            if obj.get_descricao() == descricao: 
+                return obj.get_id()
+        return None
+        
